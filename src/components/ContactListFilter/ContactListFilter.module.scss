@@ -1,0 +1,17 @@
+.filter {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+
+  &__label {
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 250px;
+    height: 30px;
+
+    appearance: none;
+    border: 1px solid green;
+  }
+}

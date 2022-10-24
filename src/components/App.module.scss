@@ -1,0 +1,17 @@
+.container {
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  display: flex;
+  gap: 20px;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0px 0px 64px 8px rgba(66, 68, 90, 0.25);
+  border-radius: 25px;
+
+  padding: 20px;
+}

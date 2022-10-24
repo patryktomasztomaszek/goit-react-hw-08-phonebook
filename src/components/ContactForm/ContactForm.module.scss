@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+
+  &__label {
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 250px;
+    height: 30px;
+
+    appearance: none;
+    border: 1px solid green;
+  }
+
+  &__button {
+    width: 250px;
+    height: 30px;
+
+    appearance: none;
+    background: lightgreen;
+    border: 0;
+    border-radius: 5px;
+
+    font-size: 22px;
+    font-weight: 500;
+
+    transition: 250ms;
+
+    &:hover {
+      background: green;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
