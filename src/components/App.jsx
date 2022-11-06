@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
 import ContactListFilter from './ContactListFilter/ContactListFilter';
 import styles from './App.module.scss';
 import { Notify } from 'notiflix';
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+} from 'utils/localStorageHandler';
 
 export const App = () => {
   // useState Hook for contacts data storage (array of objects) =>
@@ -12,6 +16,21 @@ export const App = () => {
   const [contacts, setContacts] = useState([]);
   // useState Hook for filter query storage (string)
   const [filter, setFilter] = useState('');
+
+  // Local Storage of contacts - loaded on site load
+  useEffect(() => {
+    const localStorageBuffer = getFromLocalStorage('contacts');
+    if (localStorageBuffer.length > 0) {
+      setContacts(contacts => (contacts = getFromLocalStorage('contacts')));
+    } else {
+      setToLocalStorage('contacts', []);
+    }
+  }, []);
+
+  // Updating local storage on contacts update
+  useEffect(() => {
+    setToLocalStorage('contacts', contacts);
+  }, [contacts]);
 
   // Function for adding contact via form submit
   const addContact = event => {
