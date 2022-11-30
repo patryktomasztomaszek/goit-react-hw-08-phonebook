@@ -17,6 +17,8 @@ export const App = () => {
   // useState Hook for filter query storage (string)
   const [filter, setFilter] = useState('');
 
+  if (localStorage.getItem('contacts') === null) {setToLocalStorage('contacts', [])}
+
   // Local Storage of contacts - loaded on site load
   useEffect(() => {
     const localStorageBuffer = getFromLocalStorage('contacts');
