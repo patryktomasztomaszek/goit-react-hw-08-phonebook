@@ -4,8 +4,13 @@ import styles from './ContactListFilter.module.scss';
 
 // Component for filter input, and input query update trigger
 function ContactListFilter({ updateFilter }) {
-  // CSS classes => style variables
+
   const { filter, filter__label, filter__input } = styles;
+
+  const handleChange = event => {
+    const query = (event.currentTarget.value);
+    updateFilter(query);
+  }
 
   return (
     <section className={filter}>
@@ -14,7 +19,7 @@ function ContactListFilter({ updateFilter }) {
       </label>
       <input
         className={filter__input}
-        onChange={updateFilter}
+        onChange={handleChange}
         name="filter"
       ></input>
     </section>
