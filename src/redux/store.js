@@ -1,8 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { devToolsEnhancer } from '@redux-devtools/extension';
-import rootReducer from './reducer';
-
-const enhancer = devToolsEnhancer();
-const store = configureStore({ reducer: rootReducer }, enhancer);
+import { contactsApi } from 'services/contactsApi';
+import filterReducer from './slices/filterSlice';
+const store = configureStore({
+  reducer: {
+    filter: filterReducer,
+    [contactsApi.reducerPath]: contactsApi.reducer,
+  },
+  middleware: getDefaultMiddleware =>
+  getDefaultMiddleware().concat(contactsApi.middleware),
+  devTools: true,
+});
 
 export default store;

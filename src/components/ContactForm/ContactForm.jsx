@@ -1,14 +1,41 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {
+  useGetContactsQuery,
+  useAddContactMutation,
+} from 'services/contactsApi';
 import styles from './ContactForm.module.scss';
 
-function ContactForm({ addContact }) {
-  // CSS classes => style variables
+function ContactForm() {
+  const { data: contacts = [] } = useGetContactsQuery();
+  const [addContact, { isLoading }] = useAddContactMutation();
+
+  const onSubmit = async event => {
+    event.preventDefault();
+    const form = event.currentTarget.elements;
+    const name = form.name.value;
+    const number = form.number.value;
+
+    if (contacts.some(contact => contact.name === name)) {
+      alert(`${name} already existst in Contact Book!`);
+    } else if (contacts.some(contact => contact.number === number)) {
+      alert(`${number} number already exists in Contact Book!`);
+    } else {
+      try {
+        await addContact({
+          name,
+          phone: number,
+        });
+      } catch (error) {
+        alert('Something went south... Try again!');
+      }
+    }
+  };
+
   const { form, form__label, form__input, form__button } = styles;
 
   return (
     <section>
-      <form className={form} onSubmit={addContact}>
+      <form className={form} onSubmit={onSubmit}>
         <label className={form__label} htmlFor="name">
           Name
         </label>
@@ -29,12 +56,13 @@ function ContactForm({ addContact }) {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button className={form__button}>Add contact</button>
+        <button disabled={isLoading} className={form__button}>
+          {' '}
+          {!isLoading ? 'Add contact' : 'Adding...'}
+        </button>
       </form>
     </section>
   );
 }
-
-ContactForm.propTypes = { addContact: PropTypes.func.isRequired };
 
 export default ContactForm;

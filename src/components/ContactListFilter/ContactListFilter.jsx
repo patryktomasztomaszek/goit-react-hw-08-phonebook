@@ -1,16 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { updateFilter } from 'redux/slices/filterSlice';
 import styles from './ContactListFilter.module.scss';
 
 // Component for filter input, and input query update trigger
-function ContactListFilter({ updateFilter }) {
-
+function ContactListFilter() {
   const { filter, filter__label, filter__input } = styles;
 
-  const handleChange = event => {
-    const query = (event.currentTarget.value);
-    updateFilter(query);
-  }
+  const dispatch = useDispatch();
+
+  const onChange = event => {
+    const query = event.currentTarget.value;
+    dispatch(updateFilter(query));
+  };
 
   return (
     <section className={filter}>
@@ -19,15 +21,11 @@ function ContactListFilter({ updateFilter }) {
       </label>
       <input
         className={filter__input}
-        onChange={handleChange}
+        onChange={onChange}
         name="filter"
       ></input>
     </section>
   );
 }
-
-ContactListFilter.propTypes = {
-  updateFilter: PropTypes.func.isRequired,
-};
 
 export default ContactListFilter;
