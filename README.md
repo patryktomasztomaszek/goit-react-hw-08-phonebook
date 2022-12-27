@@ -1,10 +1,10 @@
-# Zadanie domowe React 07 - Książka telefoniczna 😸
+# Zadanie domowe React 08 - Książka telefoniczna 😸
 
-> goit-react-hw-07-phonebook
+> goit-react-hw-08-phonebook
 
 ## Kryteria zaliczenia pracy domowej 🐈
 
-> [https://github.com/goitacademy/react-homework/blob/master/homework-07/README.pl.md](https://github.com/goitacademy/react-homework/blob/master/homework-07/README.pl.md)
+> [https://github.com/goitacademy/react-homework/blob/master/homework-08/README.pl.md](https://github.com/goitacademy/react-homework/blob/master/homework-08/README.pl.md)
 
 ## Użyte technologie 🐈
 
@@ -12,4 +12,4 @@
 
 ## Wersja OnLine pracy domowej 🐈
 
-> [https://patryktomasztomaszek.github.io/goit-react-hw-07-phonebook/](https://patryktomasztomaszek.github.io/goit-react-hw-07-phonebook/)
+> [https://patryktomasztomaszek.github.io/goit-react-hw-08-phonebook/](https://patryktomasztomaszek.github.io/goit-react-hw-08-phonebook/)

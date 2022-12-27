@@ -4,7 +4,7 @@ import {
   useGetContactsQuery,
   useDeleteContactMutation,
 } from 'services/contactsApi';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 
 // Component for contacts data rendering
