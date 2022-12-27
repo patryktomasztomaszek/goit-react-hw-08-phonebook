@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/687.f4a30ec0.chunk.css","mappings":"AAAA,6BACE,aACA","sources":["pages/LoginPage/LoginPage.module.scss"],"sourcesContent":[".login_form {\n  display: flex;\n  flex-flow: column nowrap;\n}\n"],"names":[],"sourceRoot":""}
