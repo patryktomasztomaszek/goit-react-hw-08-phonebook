@@ -2,7 +2,7 @@
   "name": "goit-react-hw-08-phonebook",
   "version": "1.0",
   "private": true,
-  "homepage": "ptt-goit-react-hw-08-phonebook.netlify.app",
+  "homepage": "https://ptt-goit-react-hw-08-phonebook.netlify.app",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/toolkit": "^1.9.1",
