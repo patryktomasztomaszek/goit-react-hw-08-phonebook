@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-  useGetContactsQuery,
   useAddContactMutation,
-} from 'services/contactsApi';
+  useGetContactsQuery,
+} from 'services/phonebookApi';
 import styles from './ContactForm.module.scss';
 
 function ContactForm() {
   const { data: contacts = [] } = useGetContactsQuery();
-  const [addContact, { isLoading }] = useAddContactMutation();
+  const [addContact] = useAddContactMutation();
 
   const onSubmit = async event => {
     event.preventDefault();
-    const form = event.currentTarget.elements;
+    const form = event.target;
     const name = form.name.value;
     const number = form.number.value;
 
@@ -23,7 +23,7 @@ function ContactForm() {
       try {
         await addContact({
           name,
-          phone: number,
+          number,
         });
       } catch (error) {
         alert('Something went south... Try again!');
@@ -56,10 +56,7 @@ function ContactForm() {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button disabled={isLoading} className={form__button}>
-          {' '}
-          {!isLoading ? 'Add contact' : 'Adding...'}
-        </button>
+        <button className={form__button}>Add contact</button>
       </form>
     </section>
   );

@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { contactsApi } from 'services/contactsApi';
-import filterReducer from './slices/filterSlice';
+import { phonebookApi } from 'services/phonebookApi';
+import tokenSlice from './tokenSlice';
+import filterSlice from './filterSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore, PERSIST } from 'redux-persist';
-import userSlice from './slices/userSlice';
+import userSlice from './userSlice';
 
 const persistConfig = {
   key: 'user',
@@ -13,18 +14,19 @@ const persistConfig = {
 
 const persistedUserSlice = persistReducer(persistConfig, userSlice);
 
-export const store = configureStore({
+export let store = configureStore({
   reducer: {
-    filter: filterReducer,
+    [phonebookApi.reducerPath]: phonebookApi.reducer,
+    token: tokenSlice,
     user: persistedUserSlice,
-    [contactsApi.reducerPath]: contactsApi.reducer,
+    filter: filterSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [PERSIST],
       },
-    }).concat(contactsApi.middleware),
+    }).concat(phonebookApi.middleware),
   devTools: true,
 });
 

@@ -6,12 +6,12 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     addUser: (state, { payload }) => payload,
     deleteUser: (state, { payload }) => initialState,
-  }
+  },
 });
 
 export const { addUser, deleteUser } = userSlice.actions;

@@ -1,61 +1,70 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const contactsApi = createApi({
-  reducerPath: 'phonebookApi',
+export const phonebookApi = createApi({
+  reducerPath: 'contacts',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://connections-api.herokuapp.com',
+    baseUrl: 'https://connections-api.herokuapp.com/',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().token;
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ['Users', 'Contacts'],
+
+  tagTypes: ['Contacts', 'User'],
   endpoints: builder => ({
     signup: builder.mutation({
-      query: newUserData => ({
-        url: '/users/signup',
+      query: values => ({
+        url: 'users/signup',
         method: 'POST',
-        body: newUserData,
+        body: values,
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['User'],
     }),
+
     login: builder.mutation({
-      query: userData => ({
-        url: '/users/login',
+      query: values => ({
+        url: 'users/login',
         method: 'POST',
-        body: userData,
+        body: values,
       }),
-      invalidatesTags: ['Users'],
+      invalidatesTags: ['User'],
     }),
+
     logout: builder.mutation({
-      query: () => ({
-        url: '/users/logout',
+      query: values => ({
+        url: 'users/logout',
         method: 'POST',
+        body: values,
       }),
-      invalidatesTags: ['Users'],
     }),
+
     currentUser: builder.query({
-      query: () => '/users/current',
-      providesTags: ['Users'],
+      query: () => ({
+        url: 'users/current',
+      }),
+      providesTags: ['User'],
     }),
+
     getContacts: builder.query({
-      query: () => '/contacts',
-      providesTags: ['Users', 'Contacts'],
+      query: () => 'contacts',
+      providesTags: ['Contacts', 'User'],
     }),
+
     addContact: builder.mutation({
       query: contact => ({
-        url: '/contacts',
+        url: 'contacts',
         method: 'POST',
         body: contact,
       }),
       invalidatesTags: ['Contacts'],
     }),
+
     deleteContact: builder.mutation({
       query: id => ({
-        url: `/contacts/${id}`,
+        url: `contacts/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Contacts'],
@@ -64,11 +73,11 @@ export const contactsApi = createApi({
 });
 
 export const {
-  useSignupMutation,
-  useLoginMutation,
-  useLogoutMutation,
   useCurrentUserQuery,
+  useLoginMutation,
+  useSignupMutation,
+  useLogoutMutation,
   useGetContactsQuery,
   useAddContactMutation,
   useDeleteContactMutation,
-} = contactsApi;
+} = phonebookApi;
